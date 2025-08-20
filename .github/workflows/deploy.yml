@@ -31,12 +31,14 @@ jobs:
         node-version: '18'
 
     - name: Create config.js with API key
+      env:
+        API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       run: |
         cat > config.js << EOF
         // Auto-generated configuration file for GitHub Pages deployment
         const CONFIG = {
             // Google Maps API key injected from GitHub Secrets
-            GOOGLE_MAPS_API_KEY: '${{ secrets.GOOGLE_MAPS_API_KEY }}',
+            GOOGLE_MAPS_API_KEY: '${API_KEY}',
             
             // Default map center coordinates (New York City)
             DEFAULT_MAP_CENTER: {
