@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Travel Planner</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Travel Planner">
+    <meta name="description" content="Plan your travel itinerary with interactive maps and notes">
+    
+    <!-- PWA Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iMjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05MCA0NUw2MCA3NUg4MFY5MEg2MFYxMDVIODBWMTIwSDEwMFYxMDVIMTIwVjkwSDEwMFY3NUgxMjBMOTAgNDVaIiBmaWxsPSJ3aGl0ZSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMTgwIiB5Mj0iMTgwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0idXJsKCNncmFkaWVudDBfbGluZWFyXzFfMSkiLz4KPHBhdGggZD0iTTE2IDhMMTEgMTNIMTRWMTZIMTFWMTlIMTRWMjJIMThWMTlIMjFWMTZIMThWMTNIMjFMMTYgOFoiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSIzMiIgeTI9IjMyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-map-marked-alt"></i> Travel Planner</h1>
+                <button class="btn-primary" id="newTripBtn">
+                    <i class="fas fa-plus"></i> New Trip
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="trip-info">
+                    <h2 id="tripTitle">My Travel Plan</h2>
+                    <div class="trip-dates">
+                        <input type="date" id="startDate" class="date-input">
+                        <span>to</span>
+                        <input type="date" id="endDate" class="date-input">
+                    </div>
+                </div>
+
+                <div class="days-container">
+                    <div class="days-header">
+                        <h3>Daily Plans</h3>
+                        <button class="btn-secondary" id="addDayBtn">
+                            <i class="fas fa-plus"></i> Add Day
+                        </button>
+                    </div>
+                    <div id="daysList" class="days-list">
+                        <!-- Days will be dynamically added here -->
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <button class="btn-outline" id="importBtn">
+                        <i class="fas fa-upload"></i> Import Plan
+                    </button>
+                    <button class="btn-outline" id="exportBtn">
+                        <i class="fas fa-download"></i> Export Plan
+                    </button>
+                    <button class="btn-outline" id="clearBtn">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+                
+                <!-- Hidden file input for importing -->
+                <input type="file" id="importFileInput" accept=".json" style="display: none;">
+            </aside>
+
+            <!-- Map Container -->
+            <main class="map-container">
+                <div id="map"></div>
+                <div class="map-controls">
+                    <button class="control-btn" id="toggleSidebarBtn" title="Toggle Travel Plan">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button class="control-btn" id="centerMapBtn" title="Center Map">
+                        <i class="fas fa-crosshairs"></i>
+                    </button>
+                    <button class="control-btn" id="toggleTrafficBtn" title="Toggle Traffic">
+                        <i class="fas fa-car"></i>
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal for adding locations -->
+    <div id="locationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Location</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="locationForm">
+                    <div class="form-group">
+                        <label for="locationName">Location Name</label>
+                        <div class="location-search-container">
+                            <input type="text" id="locationName" placeholder="e.g., Sushi Sakaba Sashisu, Tokyo Tower" required>
+                            <button type="button" id="searchLocationBtn" class="search-btn" title="Search with Google Maps">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <small class="form-help">If not found automatically, try the search button for better results</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="googleAddress">Google Maps Address (for navigation)</label>
+                        <div class="location-search-container">
+                            <input type="text" id="googleAddress" placeholder="Enter specific Google Maps address (optional)">
+                            <button type="button" id="updateCoordinatesBtn" class="search-btn" title="Update coordinates from this address">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </button>
+                        </div>
+                        <small class="form-help">Coordinates auto-update when you change this field, or click the 📍 button to update manually.</small>
+                    </div>
+                    <div class="form-group coordinates-group" style="display: none;">
+                        <label>Coordinates (auto-updated from address)</label>
+                        <div class="coordinates-container">
+                            <input type="number" id="locationLat" placeholder="Latitude" step="any" readonly>
+                            <input type="number" id="locationLng" placeholder="Longitude" step="any" readonly>
+                            <button type="button" id="clearCoordinatesBtn" class="clear-coords-btn" title="Clear coordinates">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <small class="form-help">Coordinates auto-update when you change the Google Maps address above</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="locationTime">Time</label>
+                        <input type="time" id="locationTime">
+                    </div>
+                    <div class="form-group">
+                        <label for="locationNotes">Notes</label>
+                        <textarea id="locationNotes" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-outline" id="cancelLocationBtn">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Location</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding notes -->
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Note</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="noteForm">
+                    <div class="form-group">
+                        <label for="noteContent">Note Content</label>
+                        <textarea id="noteContent" rows="5" placeholder="Add your travel notes, reminders, or any other information..." required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-outline" id="cancelNoteBtn">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Note</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet CSS and JS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Nominatim geocoding service -->
+    <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css" />
+    
+    <!-- Configuration file (load before main script) -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
