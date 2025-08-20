@@ -181,8 +181,16 @@
     <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.css" />
     
-    <!-- Configuration file (load before main script) -->
-    <script src="config.js"></script>
+    <!-- Configuration file (load before main script if it exists) -->
+    <script>
+        // Try to load config.js, but don't fail if it doesn't exist (for GitHub Pages)
+        const configScript = document.createElement('script');
+        configScript.src = 'config.js';
+        configScript.onerror = function() {
+            console.log('config.js not found - using fallback configuration');
+        };
+        document.head.appendChild(configScript);
+    </script>
     <script src="script.js"></script>
 </body>
 </html> 

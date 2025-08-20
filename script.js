@@ -20,23 +20,26 @@ let GOOGLE_MAPS_API_KEY = null;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize API key from config when available
-    if (window.CONFIG && window.CONFIG.GOOGLE_MAPS_API_KEY) {
-        GOOGLE_MAPS_API_KEY = window.CONFIG.GOOGLE_MAPS_API_KEY;
-        console.log('Google Maps API key loaded from config');
-        
-        // Check if the key is still the placeholder
-        if (GOOGLE_MAPS_API_KEY === 'YOUR_GOOGLE_MAPS_API_KEY_HERE') {
-            console.warn('Please replace the placeholder API key in config.js with your actual Google Maps API key');
-            GOOGLE_MAPS_API_KEY = null;
+    // Wait a bit for config.js to load if it exists, then initialize
+    setTimeout(function() {
+        // Initialize API key from config when available
+        if (window.CONFIG && window.CONFIG.GOOGLE_MAPS_API_KEY) {
+            GOOGLE_MAPS_API_KEY = window.CONFIG.GOOGLE_MAPS_API_KEY;
+            console.log('Google Maps API key loaded from config');
+            
+            // Check if the key is still the placeholder
+            if (GOOGLE_MAPS_API_KEY === 'YOUR_GOOGLE_MAPS_API_KEY_HERE') {
+                console.warn('Please replace the placeholder API key in config.js with your actual Google Maps API key');
+                GOOGLE_MAPS_API_KEY = null;
+            }
+        } else {
+            console.warn('Google Maps API key not found in config. Falling back to OpenStreetMap geocoding only.');
         }
-    } else {
-        console.warn('Google Maps API key not found in config. Some features may not work.');
-    }
-    
-    initializeApp();
-    initMap(); // Initialize map directly
-    loadTravelPlan();
+        
+        initializeApp();
+        initMap(); // Initialize map directly
+        loadTravelPlan();
+    }, 100); // Small delay to allow config.js to load
 });
 
 // Initialize Leaflet Map with OpenStreetMap
